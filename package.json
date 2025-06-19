@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "name": "inject-url-param",
+  "description": "An Extension.js example.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Your Name",
+    "email": "your@email.com",
+    "url": "https://yourwebsite.com"
+  },
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "extension dev",
+    "start": "extension start",
+    "build": "extension build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "extension": "^2.0.0-rc.37"
+  }
+}
