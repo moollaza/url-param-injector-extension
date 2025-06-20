@@ -41,14 +41,22 @@ input[type="text"] {
   width: 100%;
 }
 
+.override-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
 #options-link {
-    display: block;
-    text-align: center;
-    margin-top: 1em;
-    color: #007bff;
-    text-decoration: none;
+  display: block;
+  text-align: center;
+  margin-top: 1em;
+  color: #007bff;
+  text-decoration: none;
 }
 
 #options-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

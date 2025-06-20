@@ -29,12 +29,18 @@ h1 {
   display: flex;
   gap: 0.5em;
   margin-bottom: 0.5em;
+  align-items: center;
 }
 
 input {
   padding: 0.5em;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
 }
 
 button {

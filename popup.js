@@ -18,6 +18,7 @@ function renderRules(activeRules) {
   activeRules.forEach((activeRule) => {
     // Find the index of the rule in the global allRules array
     const ruleIndex = allRules.findIndex((r) => r.domain === activeRule.domain);
+    if (ruleIndex === -1) return;
 
     const ruleDiv = document.createElement("div");
     ruleDiv.className = "rule";
@@ -27,10 +28,15 @@ function renderRules(activeRules) {
     domainP.textContent = activeRule.domain;
     ruleDiv.appendChild(domainP);
 
-    activeRule.params.forEach((param, paramIndex) => {
+    activeRule.params.forEach((param) => {
+      const paramIndex = allRules[ruleIndex].params.findIndex(
+        (p) => p.key === param.key
+      );
+      if (paramIndex === -1) return;
+
       const paramDiv = document.createElement("div");
       paramDiv.className = "param";
-      
+
       const keyInput = document.createElement("input");
       keyInput.type = "text";
       keyInput.value = param.key;
@@ -46,8 +52,23 @@ function renderRules(activeRules) {
         saveRules();
       });
 
+      const overrideLabel = document.createElement("label");
+      overrideLabel.className = "override-label";
+      const overrideCheckbox = document.createElement("input");
+      overrideCheckbox.type = "checkbox";
+      overrideCheckbox.title = "Override existing parameter";
+      overrideCheckbox.checked = param.override !== false; // default to true
+      overrideCheckbox.addEventListener("change", (e) => {
+        allRules[ruleIndex].params[paramIndex].override = e.target.checked;
+        saveRules();
+      });
+
+      overrideLabel.appendChild(overrideCheckbox);
+      overrideLabel.appendChild(document.createTextNode("Override"));
+
       paramDiv.appendChild(keyInput);
       paramDiv.appendChild(valueInput);
+      paramDiv.appendChild(overrideLabel);
       ruleDiv.appendChild(paramDiv);
     });
 

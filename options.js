@@ -47,6 +47,15 @@ function renderRules() {
         saveRules();
       });
 
+      const overrideCheckbox = document.createElement("input");
+      overrideCheckbox.type = "checkbox";
+      overrideCheckbox.title = "Override existing parameter";
+      overrideCheckbox.checked = param.override !== false;
+      overrideCheckbox.addEventListener("change", (e) => {
+        rules[ruleIndex].params[paramIndex].override = e.target.checked;
+        saveRules();
+      });
+
       const removeParamBtn = document.createElement("button");
       removeParamBtn.textContent = "Remove Param";
       removeParamBtn.className = "remove-param";
@@ -58,6 +67,7 @@ function renderRules() {
 
       paramDiv.appendChild(keyInput);
       paramDiv.appendChild(valueInput);
+      paramDiv.appendChild(overrideCheckbox);
       paramDiv.appendChild(removeParamBtn);
       paramsDiv.appendChild(paramDiv);
     });
@@ -65,7 +75,7 @@ function renderRules() {
     const addParamBtn = document.createElement("button");
     addParamBtn.textContent = "Add Param";
     addParamBtn.addEventListener("click", () => {
-      rules[ruleIndex].params.push({ key: "", value: "" });
+      rules[ruleIndex].params.push({ key: "", value: "", override: true });
       saveRules();
       renderRules();
     });
@@ -88,7 +98,7 @@ function renderRules() {
 }
 
 addRuleBtn.addEventListener("click", () => {
-  rules.push({ domain: "", params: [{ key: "", value: "" }] });
+  rules.push({ domain: "", params: [{ key: "", value: "", override: true }] });
   renderRules();
   // Note: we don't save here, because the domain is empty.
   // The user will fill it and the change event will save.
@@ -96,6 +106,14 @@ addRuleBtn.addEventListener("click", () => {
 
 chrome.storage.local.get("rules", (data) => {
   if (data.rules) {
+    // Migrate old rules
+    data.rules.forEach((rule) => {
+      rule.params.forEach((param) => {
+        if (param.override === undefined) {
+          param.override = true;
+        }
+      });
+    });
     rules = data.rules;
     renderRules();
   }
