@@ -1,0 +1,67 @@
+
+/*!*********************!*\
+  !*** ./options.css ***!
+  \*********************/
+body {
+  font-family: sans-serif;
+  padding: 1em;
+  width: 600px;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+#rules-container {
+  margin-bottom: 1em;
+}
+
+.rule {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+}
+
+.rule h2 {
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+.param {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+input {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.remove-rule,
+.remove-param {
+  background-color: #dc3545;
+}
+.remove-rule:hover,
+.remove-param:hover {
+  background-color: #c82333;
+}
+
+
+/*# sourceMappingURL=page.css.map*/

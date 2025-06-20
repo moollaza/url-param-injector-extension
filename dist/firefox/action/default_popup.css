@@ -1,0 +1,34 @@
+
+/*!*******************!*\
+  !*** ./popup.css ***!
+  \*******************/
+body {
+  font-family: sans-serif;
+  padding: 1em;
+  width: 300px;
+}
+
+h1 {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+#status {
+  margin-bottom: 1em;
+}
+
+.rule {
+  margin-bottom: 0.5em;
+}
+
+.domain {
+  font-weight: bold;
+}
+
+.param {
+  padding-left: 1em;
+}
+
+
+/*# sourceMappingURL=default_popup.css.map*/
