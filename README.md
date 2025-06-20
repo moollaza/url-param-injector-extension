@@ -1,4 +1,4 @@
-# URL Params Injector
+# URL Param Injector
 
 A browser extension to automatically inject URL parameters based on user-defined rules. This is particularly useful for developers and testers who frequently use feature flags or other query parameters.
 
