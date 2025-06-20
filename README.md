@@ -12,7 +12,24 @@ A browser extension to automatically inject URL parameters based on user-defined
 
 ## Getting Started
 
-### Installation
+### Installation from Release
+
+**Recommended for most users:**
+
+1. Go to the [Latest Release](https://github.com/moollaza/inject-url-param/releases/latest) page
+2. Download the `inject-url-param.zip` file from the Assets section
+3. Extract the zip file to a folder on your computer
+4. Open your browser and navigate to the extensions page:
+   - **Chrome/Edge**: `chrome://extensions/`
+   - **Firefox**: `about:addons`
+5. Enable "Developer mode" (toggle in the top right)
+6. Click "Load unpacked" (Chrome/Edge) or "Install Add-on From File" (Firefox)
+7. Select the extracted folder containing the extension files
+8. The extension should now be installed and ready to use!
+
+### Development Installation
+
+For developers who want to build from source:
 
 1.  Clone or download this repository.
 2.  Install the dependencies:

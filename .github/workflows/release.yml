@@ -1,0 +1,71 @@
+name: Build and Release Extension
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Create zip archive
+        run: |
+          cd dist
+          zip -r ../inject-url-param.zip .
+
+      - name: Generate tag name
+        id: tag_name
+        run: |
+          # Create a timestamp-based tag
+          TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+          TAG_NAME="inject-url-param_${TIMESTAMP}"
+          echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
+          echo "release_name=Release ${TAG_NAME}" >> $GITHUB_OUTPUT
+          echo "asset_name=inject-url-param.zip" >> $GITHUB_OUTPUT
+
+      - name: Create Git tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag ${{ steps.tag_name.outputs.tag_name }}
+          git push origin ${{ steps.tag_name.outputs.tag_name }}
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_name.outputs.tag_name }}
+          release_name: ${{ steps.tag_name.outputs.release_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload zip archive
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./inject-url-param.zip
+          asset_name: ${{ steps.tag_name.outputs.asset_name }}
+          asset_content_type: application/zip
