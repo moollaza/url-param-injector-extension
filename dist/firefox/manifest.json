@@ -7,7 +7,6 @@
     "48": "icons/extension_48.png"
   },
   "permissions": [
-    "scripting",
     "storage",
     "declarativeNetRequest"
   ],
@@ -15,29 +14,12 @@
     "<all_urls>"
   ],
   "background": {
-    "service_worker": "background/service_worker.js"
+    "scripts": [
+      "background/scripts.js"
+    ]
   },
   "action": {
     "default_popup": "action/default_popup.html"
   },
-  "options_page": "options_ui/page.html",
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; "
-  },
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "/*.json",
-        "/*.js",
-        "/*.css",
-        "/*.scss",
-        "/*.sass",
-        "/*.less",
-        "*.styl"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    }
-  ]
+  "options_page": "options_ui/page.html"
 }

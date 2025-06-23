@@ -12,6 +12,14 @@
   "background": {
     "service_worker": "background.js"
   },
+  "firefox:background": {
+    "scripts": ["background.js"]
+  },
+  "gecko:browser_specific_settings": {
+    "gecko": {
+      "id": "addon@example.com"
+    }
+  },
   "action": {
     "default_popup": "popup.html"
   },
