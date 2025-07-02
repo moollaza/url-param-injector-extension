@@ -13,7 +13,9 @@ async function updateRules(rules) {
   const existingRuleIds = existingRules.map((rule) => rule.id);
 
   const newRules = [];
-  let ruleIdCounter = 1;
+  // Start rule ID counter from the highest existing ID + 1 to avoid conflicts
+  let ruleIdCounter =
+    existingRuleIds.length > 0 ? Math.max(...existingRuleIds) + 1 : 1;
 
   if (rules) {
     for (const rule of rules) {
